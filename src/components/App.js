@@ -3,17 +3,28 @@ import React from 'react';
 import Filters from './Filters';
 import PetBrowser from './PetBrowser';
 
+import {getAll} from '../data/pets.js'
+import {getByType} from '../data/pets.js'
+import {getBetweenAge} from '../data/pets.js'
+
+// console.log(getAll())
+
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      pets: [],
+      pets: [...getAll()],
       adoptedPets: [],
       filters: {
         type: 'all',
       }
     };
+  }
+
+  filterPets = (type) => {
+    console.log("stuff")
+    this.setState({pets: getByType(type)})
   }
 
   render() {
@@ -25,10 +36,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters filterPets={this.filterPets} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={ this.state.pets } />
             </div>
           </div>
         </div>
