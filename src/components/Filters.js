@@ -1,14 +1,9 @@
 import React from 'react';
 
 class Filters extends React.Component {
-  constructor() {
-    super();
-  }
   handleChangeType = event => {
     this.props.onChangeType(event.target.value)
   }
-
-
 
   render() {
     return (

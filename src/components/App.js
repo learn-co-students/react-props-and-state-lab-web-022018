@@ -22,7 +22,7 @@ class App extends React.Component {
     }
     fetch(url).then(r => r.json()).then(pets => this.setState({pets}))
   }
-  handleChangeType = type => {
+  handleOnChangeType = type => {
     this.setState({
       filters: Object.assign({}, this.filters, {
         type: type
@@ -44,7 +44,7 @@ class App extends React.Component {
             <div className="four wide column">
               <Filters
                 filters={this.state.filters}
-                onChangeType={this.handleChangeType}
+                onChangeType={this.handleOnChangeType}
                 onFindPetsClick={this.fetchPets}
                />
             </div>

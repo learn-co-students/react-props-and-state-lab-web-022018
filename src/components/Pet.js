@@ -1,10 +1,8 @@
 import React from 'react';
 
 class Pet extends React.Component {
-  constructor() {
-    super();
-  }
-  handleAdoption = event => {
+  
+  handleClick = () => {
     this.props.onAdoptPet(this.props.pet.id)
   }
 
@@ -24,7 +22,7 @@ class Pet extends React.Component {
         </div>
         <div className="extra content">
         {isAdopted ?
-          <button className="ui disabled button">Already adopted</button> : <button className="ui primary button" onClick={this.handleAdoption}>Adopt pet</button>}
+          <button className="ui disabled button">Already adopted</button> : <button className="ui primary button" onClick={this.handleClick}>Adopt pet</button>}
 
 
         </div>
