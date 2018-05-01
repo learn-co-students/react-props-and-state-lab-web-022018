@@ -1,7 +1,8 @@
 import React from 'react';
-
 import Filters from './Filters';
 import PetBrowser from './PetBrowser';
+import { getAll, getByType } from '../data/pets.js'
+
 
 class App extends React.Component {
   constructor() {
@@ -16,7 +17,37 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({pets: getAll()})
+  }
+
+
+  filterPets = (type) => {
+    console.log(type);
+    this.setState({
+      filters: Object.assign({}, this.state.filters, {
+        type: type,
+      })
+    });
+  }
+
+  filterPet = () => {
+    let type = this.state.filters.type
+    if(this.state.filters.type !== 'all') {
+      this.setState({pets: getByType(type)})
+    } else {
+      this.setState({pets: getAll()})
+    }
+  }
+  adoptedPets = (pet) => {
+    if(!this.state.adoptedPets.includes(pet)) {
+      this.setState({adoptedPets: [...this.state.adoptedPets, pet]})
+    }
+  }
+
+
   render() {
+
     return (
       <div className="ui container">
         <header>
@@ -25,10 +56,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters filterPets={this.filterPets} filterPet={this.filterPet}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} adoptedPets={this.adoptedPets}/>
             </div>
           </div>
         </div>
